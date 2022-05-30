@@ -59,6 +59,7 @@ def output_keypoints_with_lines_video(proto_file, weights_file, video_path, thre
                progressbar.ETA(), ]
     pbar = progressbar.ProgressBar(maxval=total_frame, widgets=widgets).start()
 
+    # 분석을 위한 변수 선언 및 초기화
     p = 0
     count_foot = 0
     r_shoulder = 0
