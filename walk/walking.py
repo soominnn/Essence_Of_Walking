@@ -214,13 +214,13 @@ def output_keypoints_with_lines_video(proto_file, weights_file, video_path, thre
         if cv2.waitKey(10) == 27:  # esc 입력시 종료
             break
 
-    # 발 각도
+    # 걸음걸이 구분
     if count_foot >= int(total_frame * 0.3):
         print("팔자 걸음")
     else:
         print("일자 걸음")
 
-    # 어깨 각도
+    # 어깨 대칭 구분
     if abs(l_shoulder / total_frame - r_shoulder / total_frame) >= 1:
         if l_shoulder / total_frame - r_shoulder / total_frame > 0:
             print("왼쪽 어깨 올라감")
@@ -229,6 +229,7 @@ def output_keypoints_with_lines_video(proto_file, weights_file, video_path, thre
     else:
         print("어깨의 균형이 잘 맞음")
 
+    #골반 대칭 구분
     if abs(l_hip / total_frame - r_hip / total_frame) >= 1:
         if l_hip / total_frame - r_hip / total_frame > 0:
             print("왼쪽 골반이 올라감")
