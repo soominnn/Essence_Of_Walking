@@ -69,6 +69,8 @@ def output_keypoints_with_lines_video(proto_file, weights_file, video_path, thre
     while True:
         # 동영상의 현재 프레임수
         now_frame = int(capture.get(cv2.CAP_PROP_POS_FRAMES))
+        
+        #정상 작동한다면 ret에 true반환
         ret, frame = capture.read()
 
         if ret != True:
