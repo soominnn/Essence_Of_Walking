@@ -257,13 +257,13 @@ POSE_PAIRS_BODY_25 = [[0, 1], [1, 2], [1, 5], [1, 8], [8, 9], [8, 12], [9, 10], 
                       [3, 4], [5, 6], [6, 7], [10, 11], [11, 22], [13, 14], [14, 19]]
 
 # prototxt 파일
-protoFile_body_25 = "model/pose/body_25/pose_deploy.prototxt"
+protoFile_body_25 = "./pose_deploy.prototxt"
 
 # weight 를 저장하는 caffemodel 파일
-weightsFile_body_25 = "model/pose/body_25/pose_iter_584000.caffemodel"
+weightsFile_body_25 = "./pose_iter_584000.caffemodel"
 
 # 비디오 경로
-video = "test/12.mp4"
+video = "test.mp4"
 
 output_keypoints_with_lines_video(proto_file=protoFile_body_25, weights_file=weightsFile_body_25, video_path=video,
                                   threshold=0.1, BODY_PARTS=BODY_PARTS_BODY_25, POSE_PAIRS=POSE_PAIRS_BODY_25)
