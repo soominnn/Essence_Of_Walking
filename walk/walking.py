@@ -96,7 +96,7 @@ def output_keypoints_with_lines_video(proto_file, weights_file, video_path, thre
         x_data, y_data = [], []
 
         #진행도
-        print(f"============================== frame: {now_frame} / {total_frame} ==============================")
+        print(f"========== frame: {now_frame} / {total_frame} ==========")
 
         for i in range(len(BODY_PARTS)):
             # 신체 부위의 confidence map
