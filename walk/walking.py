@@ -107,7 +107,7 @@ def output_keypoints_with_lines_video(proto_file, weights_file, video_path, thre
             min_val, prob, min_loc, point = cv2.minMaxLoc(prob_map)
 
             # 표시하지 않을 key points
-            without = ["REye", "LEye", "REar", "LEar", "LSmallToe", "LHeel", "RHeel", "RSmallToe"]
+            without = ["REye", "LEye", "REar", "LEar", "LSmallToe", "LHeel", "RHeel", "RSmallToe", "Background"]
 
             # resize된 이미지에 맞게 keypoints 위치 조정
             x = (w * point[0]) / out_width
