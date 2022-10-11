@@ -2,6 +2,16 @@ import cv2
 import numpy as np
 from pathlib import Path
 
+# 세점 사이의 각도 계산
+def get_angle(p1: list, p2: list, p3: list, angle_vec: bool) -> float:
+    rad = np.arctan2(p3[1] - p2[1], p3[0] - p2[0]) - np.arctan2(
+        p1[1] - p2[1], p1[0] - p2[0]
+    )
+    deg = rad * (180 / np.pi)
+    if angle_vec:
+        deg = 360 - abs(deg)
+    return abs(deg)
+
 # MPII에서 각 파트 번호, 선으로 연결될 POSE_PAIRS
 BODY_PARTS = {
     0: "Nose",
@@ -89,7 +99,14 @@ fourcc = cv2.VideoWriter_fourcc(*"MPEG")
 writer = None
 zeros = None
 
+# 각도 계산을 위한 변수
 total_frame = 0
+count_foot = 0
+r_shoulder = 0
+l_shoulder = 0
+r_hip = 0
+l_hip = 0
+
 # 반복문을 통해 카메라에서 프레임을 지속적으로 받아옴
 while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     # 웹캠으로부터 영상 가져옴
@@ -125,6 +142,9 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
 
     # 결과 받아오기
     output = net.forward()
+
+    # 키포인트 X,Y 좌표
+    x_data, y_data = [],[]
 
     # 키포인트 검출시 이미지에 그려줌
     points = []
@@ -177,6 +197,8 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
                 )
 
                 points.append((x, y))
+                x_data.append(x)
+                y_data.append(y)
 
             else:  # key point가 검출이 되지 않았을 때
                 cv2.circle(
@@ -199,6 +221,8 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
                 )
 
                 points.append(None)
+                x_data.append(0)
+                y_data.append(0)
 
         # keypoint가 without에 해당되는 경우 영상에 표시하지 않음
         else:
@@ -212,6 +236,8 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
                     lineType=cv2.FILLED,
                 )
                 points.append((x, y))
+                x_data.append(x)
+                y_data.append(y)
 
             else:  # key point가 검출이 되지 않았을 때
                 cv2.circle(
@@ -223,6 +249,31 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
                     lineType=cv2.FILLED,
                 )
                 points.append(None)
+                x_data.append(0)
+                y_data.append(0)
+
+    # 오른쪽 발목 각도 계산
+    r1 = [x_data[10], y_data[10]]
+    r2 = [x_data[11], y_data[11]]
+    r3 = [x_data[22], y_data[22]]
+    angle_r = get_angle(r1, r2, r3, True)
+
+    # 왼쪽 발목 각도 계산
+    l1 = [x_data[13], y_data[13]]
+    l2 = [x_data[14], y_data[14]]
+    l3 = [x_data[19], y_data[19]]
+    angle_l = get_angle(l1, l2, l3, False)
+
+    # 좌우 어깨 좌표
+    l_shoulder += y_data[5]
+    r_shoulder += y_data[2]
+
+    # 좌우 골반 좌표
+    l_hip += y_data[12]
+    r_hip += y_data[9]
+
+    if angle_r <= 165 and angle_l <= 165:
+        count_foot += 1
 
     # 각 POSE_PAIRS별로 선 그어줌 (머리 - 목, 목 - 왼쪽어깨, ...)
     # 각 pair를 line으로 연결
@@ -256,6 +307,30 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
 
     writer.write(cv2.resize(frame, (368, 368)))
     cv2.imshow("Output-Keypoints", frame)
+
+# 걸음걸이 구분
+if count_foot >= int(total_frame * 0.3):
+    print("팔자 걸음")
+else:
+    print("일자 걸음")
+
+# 어깨 대칭 구분
+if abs(l_shoulder / total_frame - r_shoulder / total_frame) >= 1:
+    if l_shoulder / total_frame - r_shoulder / total_frame > 0:
+        print("왼쪽 어깨 올라감")
+    else:
+        print("오른쪽 어깨 올라감")
+else:
+    print("어깨의 균형이 잘 맞음")
+
+# 골반 대칭 구분
+if abs(l_hip / total_frame - r_hip / total_frame) >= 1:
+    if l_hip / total_frame - r_hip / total_frame > 0:
+        print("왼쪽 골반이 올라감")
+    else:
+        print("오른쪽 골반이 올라감")
+else:
+    print("골반 균형이 잘 맞음")
 
 print(total_frame)
 capture.release()  # 카메라 장치에서 받아온 메모리 해제
