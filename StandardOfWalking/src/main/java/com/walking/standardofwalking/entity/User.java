@@ -1,4 +1,4 @@
-package com.walking.standardofwalking;
+package com.walking.standardofwalking.entity;
 
 import lombok.*;
 
@@ -9,7 +9,10 @@ import java.time.LocalDateTime;
 @Getter //멤버 변수 getter 메소드 생성
 @Entity //테이블과 매핑되는 엔티티 클래스임
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  //클래스의 기본 생성자를 생성해줌
+@AllArgsConstructor
+@ToString
 public class User {
+
     @Id //primary key설정
     @GeneratedValue(strategy = GenerationType.AUTO) //자동 증가 적용
     private Long cid;
