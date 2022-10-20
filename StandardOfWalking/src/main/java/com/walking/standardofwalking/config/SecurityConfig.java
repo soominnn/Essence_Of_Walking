@@ -2,6 +2,7 @@ package com.walking.standardofwalking.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()   //Todo: 접근 권한 제어
                 .anyRequest().permitAll();
+//        http
+//                .authorizeRequests()
+//                .mvcMatchers(HttpMethod.OPTIONS,"/**").permitAll();
     }
     //Todo: 쿠키, 세션
 }

@@ -1,6 +1,8 @@
 package com.walking.standardofwalking.entity;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.persistence.Id;
@@ -35,6 +37,7 @@ public class User {
 
 //    private LocalDateTime createdTime;
 
+
     @Builder
     public User(String name, String userid, String password, String email,
                 String gender, String age, String phone){
@@ -46,5 +49,15 @@ public class User {
         this.gender = gender;
         this.age = age;
         this.phone = phone;
+    }
+
+    public void patch(User user) {
+        this.name = user.getName();
+        this.userid = user.getUserid();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
+        this.gender = user.getGender();
+        this.age = user.getAge();
+        this.phone = user.getPhone();
     }
 }

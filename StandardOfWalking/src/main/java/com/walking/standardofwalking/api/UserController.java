@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
+//@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class UserController {
     @Autowired
@@ -20,7 +21,7 @@ public class UserController {
 
     // POST
     //유저 생성 -> 회원가입
-    @PostMapping("/signup")
+    @PostMapping("/users")
     public ResponseEntity<User> create(@RequestBody UserForm dto){
         User created = userService.create(dto);
         return (created != null) ?
@@ -43,8 +44,20 @@ public class UserController {
     }
 
     //회원정보 삭제
-    @PostMapping("/users/delete/{userid}")
-    public void deleteUser(@PathVariable String userid){
-        userService.delete(userid);
+    @DeleteMapping("/users/delete/{userid}")
+    public ResponseEntity<User> delete(@PathVariable String userid){
+        Optional<User> deleted = userService.delete(userid);
+        return (deleted != null) ?
+                ResponseEntity.status(HttpStatus.NO_CONTENT).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    //회원정보 수정
+    @PatchMapping("/users/info/{userid}")
+    public ResponseEntity<User> update(@PathVariable String userid, @RequestBody UserForm dto) {
+        User updated = userService.update(userid, dto);
+        return (updated != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(updated) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
