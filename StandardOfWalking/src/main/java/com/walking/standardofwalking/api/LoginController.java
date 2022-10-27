@@ -2,38 +2,59 @@ package com.walking.standardofwalking.api;
 
 import com.walking.standardofwalking.dto.LoginForm;
 import com.walking.standardofwalking.entity.User;
+import com.walking.standardofwalking.service.LoginService;
 import com.walking.standardofwalking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     private UserService userService;
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private LoginService loginService;
 
-    //로그인
-    @PostMapping
-    public String login(@RequestBody LoginForm form) {
-        //입력받은 아이디와 패스워드
-        String loginId = form.getUserid();
-        String loginPass = form.getPassword();
+    //서버에서 쿠키 생성
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginForm form, HttpServletResponse response){
 
-       Optional<User> user =  userService.findByUserId(loginId);    //아이디로 유저 찾아서
-       if(user.isPresent()){
-           if(passwordEncoder.matches(loginPass, user.get().getPassword())){    //저장된 해시 비밀번호와 같으면 로그인 성공
-               return "login success";
-           }
-       }
-       return "login fail";
+        User loginUser = loginService.login(form.getUserid(), form.getPassword());  //아이디 비번 일치하는 회원 찾기
+
+        if(loginUser == null){  //없을경우
+            return new ResponseEntity<User>(loginUser, HttpStatus.NO_CONTENT);
+        }
+
+        //쿠키 생성
+        Cookie idCookie = new Cookie("userid", String.valueOf(loginUser.getUserid()));
+        response.addCookie(idCookie);
+
+        return new ResponseEntity<User>(loginUser, HttpStatus.OK);
     }
+
+    //서버에서 쿠키 조회하기
+    @GetMapping("/")
+    public ResponseEntity homeLogin(@CookieValue(name="userid", required = false) String userid){
+        User loginUser = userService.findByUserId(userid).get();
+        if(loginUser == null){
+            return new ResponseEntity<User>(loginUser, HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<User>(loginUser, HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity logout(HttpServletResponse response){
+        Cookie cookie = new Cookie("userid", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
