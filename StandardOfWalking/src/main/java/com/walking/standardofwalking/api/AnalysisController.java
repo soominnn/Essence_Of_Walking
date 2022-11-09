@@ -1,19 +1,31 @@
 package com.walking.standardofwalking.api;
 
+import com.walking.standardofwalking.entity.Analysis;
+import com.walking.standardofwalking.repository.AnalysisRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @RestController
 public class AnalysisController {
     //걸음걸이 분석
-    @GetMapping("/python")
+    @Autowired
+    private AnalysisRepository analysisRepository;
+    
+    @GetMapping("/python/{userid}")
     @ResponseBody
-    public String pythonProcessbuilder() throws IOException, InterruptedException {
+    public String pythonProcessbuilder(@PathVariable String userid) throws IOException, InterruptedException {
         System.out.println("pythonbuilder ");
         String arg1;
         ProcessBuilder builder;
@@ -31,9 +43,15 @@ public class AnalysisController {
         //// 서브 프로세스가 출력하는 내용을 받기 위해
         br = new BufferedReader(new InputStreamReader(process.getInputStream(),"UTF-8"));
 
+        int count = 0;
         String line;
+        String[] data;
         while ((line = br.readLine()) != null) {
-            System.out.println(">>>  " + line); // 표준출력에 쓴다
+            System.out.println(">>>  " + line);// 표준출력에 쓴다
+            data = line.split("   ");
+            if(count!=0)
+                analysisRepository.save(new Analysis(userid,data[0],data[1],data[2],data[3],data[4],data[5],LocalDateTime.now()));
+            count++;
         }
 
         if(exitval !=0){
@@ -42,5 +60,11 @@ public class AnalysisController {
         }
 
         return "pythonconnet";
+    }
+
+    @GetMapping("/result/{userid}")
+    public Stream<Analysis> getResult(@PathVariable String userid){
+        return analysisRepository.findAll().stream()
+                .filter(m->m.getUserid().equals(userid));
     }
 }

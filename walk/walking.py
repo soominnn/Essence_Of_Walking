@@ -272,6 +272,21 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     l_hip += y_data[12]
     r_hip += y_data[9]
 
+    # 정보 출력
+    print(
+        round(angle_l, 2),
+        " ",
+        round(angle_r, 2),
+        " ",
+        round(l_shoulder, 2),
+        " ",
+        round(r_shoulder, 2),
+        " ",
+        round(l_hip, 2),
+        " ",
+        round(r_hip, 2),
+    )
+
     if angle_r <= 165 and angle_l <= 165:
         count_foot += 1
 
@@ -309,29 +324,29 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     cv2.imshow("Output-Keypoints", frame)
 
 # 걸음걸이 구분
-if count_foot >= int(total_frame * 0.3):
-    print("팔자 걸음")
-else:
-    print("일자 걸음")
-
-# 어깨 대칭 구분
-if abs(l_shoulder / total_frame - r_shoulder / total_frame) >= 1:
-    if l_shoulder / total_frame - r_shoulder / total_frame > 0:
-        print("왼쪽 어깨 올라감")
-    else:
-        print("오른쪽 어깨 올라감")
-else:
-    print("어깨의 균형이 잘 맞음")
-
-# 골반 대칭 구분
-if abs(l_hip / total_frame - r_hip / total_frame) >= 1:
-    if l_hip / total_frame - r_hip / total_frame > 0:
-        print("왼쪽 골반이 올라감")
-    else:
-        print("오른쪽 골반이 올라감")
-else:
-    print("골반 균형이 잘 맞음")
-
-print(total_frame)
+# if count_foot >= int(total_frame * 0.3):
+#     print("팔자 걸음")
+# else:
+#     print("일자 걸음")
+#
+# # 어깨 대칭 구분
+# if abs(l_shoulder / total_frame - r_shoulder / total_frame) >= 1:
+#     if l_shoulder / total_frame - r_shoulder / total_frame > 0:
+#         print("왼쪽 어깨 올라감")
+#     else:
+#         print("오른쪽 어깨 올라감")
+# else:
+#     print("어깨의 균형이 잘 맞음")
+#
+# # 골반 대칭 구분
+# if abs(l_hip / total_frame - r_hip / total_frame) >= 1:
+#     if l_hip / total_frame - r_hip / total_frame > 0:
+#         print("왼쪽 골반이 올라감")
+#     else:
+#         print("오른쪽 골반이 올라감")
+# else:
+#     print("골반 균형이 잘 맞음")
+#
+# print(total_frame)
 capture.release()  # 카메라 장치에서 받아온 메모리 해제
 cv2.destroyAllWindows()  # 모든 윈도우 창 닫음

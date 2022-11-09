@@ -3,6 +3,7 @@ package com.walking.standardofwalking.service;
 import com.walking.standardofwalking.dto.LoginForm;
 import com.walking.standardofwalking.entity.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
+@Slf4j
 public class LoginService {
     @Autowired
     private final UserService userService;

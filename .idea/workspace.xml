@@ -2,7 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1c7f398-d2b3-4d37-bd4f-36f1babf0594" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/entity/Analysis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/repository/AnalysisRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/7.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/api/AnalysisController.class" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/api/AnalysisController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/api/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/api/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/dto/LoginForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/dto/LoginForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/service/LoginService.class" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/main/com/walking/standardofwalking/service/LoginService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/test/com/walking/standardofwalking/UserTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/classes/java/test/com/walking/standardofwalking/UserTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/reports/tests/test/classes/com.walking.standardofwalking.UserTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/reports/tests/test/classes/com.walking.standardofwalking.UserTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/reports/tests/test/packages/com.walking.standardofwalking.html" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/reports/tests/test/packages/com.walking.standardofwalking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/TEST-com.walking.standardofwalking.UserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/TEST-com.walking.standardofwalking.UserTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/output.mkv" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/output.mkv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/api/AnalysisController.java" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/api/AnalysisController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/api/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/api/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/dto/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/dto/LoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/StandardOfWalking/src/main/java/com/walking/standardofwalking/service/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/walk/walking.py" beforeDir="false" afterPath="$PROJECT_DIR$/walk/walking.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,14 +50,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/hongik/Desktop/Walk/The-Essence-Of-Walking-AI&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="walking" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="The-Essence-Of-Walking-AI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/walk" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/walk/walking.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.walking" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -54,5 +108,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
