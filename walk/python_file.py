@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import pandas as pd
-from pathlib import Path
 
 
 def get_angle(p1: list, p2: list, p3: list, angle_vec: bool) -> float:
@@ -31,9 +30,7 @@ def output_keypoints_with_lines_video(
     fps = int(capture.get(cv2.CAP_PROP_FPS))
 
     ret, frame = capture.read()
-    frame_height = frame.shape[1]
-    frame_width = frame.shape[0]
-    # (frame_height, frame_width) = frame.shape[:2]
+    (frame_height, frame_width) = frame.shape[:2]
     h = 700
     w = int(((h / 2) / frame_height) * frame_width) * 2
 
@@ -240,19 +237,23 @@ def output_keypoints_with_lines_video(
 
             if pair[0] in foot:
                 if points[part_a] and points[part_b]:
-                    cv2.line(frame, points[part_a], points[part_b], (0, 0, 255), 4)
+                    cv2.line(frame, points[part_a],
+                             points[part_b], (0, 0, 255), 4)
 
             elif pair in hip:
                 if points[part_a] and points[part_b]:
-                    cv2.line(frame, points[part_a], points[part_b], (255, 0, 75), 4)
+                    cv2.line(frame, points[part_a],
+                             points[part_b], (255, 0, 75), 4)
 
             elif pair in shoulder:
                 if points[part_a] and points[part_b]:
-                    cv2.line(frame, points[part_a], points[part_b], (255, 0, 0), 4)
+                    cv2.line(frame, points[part_a],
+                             points[part_b], (255, 0, 0), 4)
 
             else:
                 if points[part_a] and points[part_b]:
-                    cv2.line(frame, points[part_a], points[part_b], (0, 255, 0), 4)
+                    cv2.line(frame, points[part_a],
+                             points[part_b], (0, 255, 0), 4)
 
         if writer is None:
             writer = cv2.VideoWriter(out_path, fourcc, fps, (w, h), True)
@@ -316,8 +317,6 @@ POSE_PAIRS_BODY_25 = [
     [14, 19],
 ]
 
-# 각 파일 path
-BASE_DIR = Path(__file__).resolve().parent
 # 신경 네트워크의 구조를 지정하는 prototxt 파일 (다양한 계층이 배열되는 방법 등)
 protoFile_body_25 = (
     "C:\\Users\\gram\\openpose\\models\\pose\\body_25\\pose_deploy.prototxt"

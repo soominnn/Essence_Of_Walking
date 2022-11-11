@@ -31,7 +31,7 @@ public class AnalysisController {
         ProcessBuilder builder;
         BufferedReader br;
 
-        arg1 = "C:/Users/gram/Desktop/prac/python_live.py";//파이썬 파일 경로
+        arg1 = "C:/Users/gram/The-Essence-Of-Walking-AI/walk/python_live.py";//파이썬 파일 경로
         builder = new ProcessBuilder("python",arg1);
 
         builder.redirectErrorStream(true);
@@ -69,7 +69,7 @@ public class AnalysisController {
         ProcessBuilder builder;
         BufferedReader br;
 
-        arg1 = "C:/Users/gram/Desktop/prac/python_file.py";//파이썬 파일 경로
+        arg1 = "C:/Users/gram/The-Essence-Of-Walking-AI/walk/python_file.py";//파이썬 파일 경로
         builder = new ProcessBuilder("python",arg1);
 
         builder.redirectErrorStream(true);
