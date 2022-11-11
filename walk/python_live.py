@@ -12,7 +12,8 @@ def get_angle(p1: list, p2: list, p3: list, angle_vec: bool) -> float:
         deg = 360 - abs(deg)
     return abs(deg)
 
-# MPII에서 각 파트 번호, 선으로 연결될 POSE_PAIRS
+
+# BODY25에서 각 파트 번호, 선으로 연결될 POSE_PAIRS
 BODY_PARTS = {
     0: "Nose",
     1: "Neck",
@@ -63,9 +64,9 @@ POSE_PAIRS = [
 
 # 각 파일 path
 BASE_DIR = Path(__file__).resolve().parent
-protoFile = "./pose_deploy.prototxt"
+protoFile = "C:\\Users\\gram\\openpose\\models\\pose\\body_25\\pose_deploy.prototxt"
 weightsFile = (
-    "./pose_iter_584000.caffemodel"
+    "C:\\Users\\gram\\openpose\\models\\pose\\body_25\\pose_iter_584000.caffemodel"
 )
 # 위의 path에 있는 network 모델 불러오기
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
@@ -99,14 +100,14 @@ fourcc = cv2.VideoWriter_fourcc(*"MPEG")
 writer = None
 zeros = None
 
-# 각도 계산을 위한 변수
 total_frame = 0
 count_foot = 0
 r_shoulder = 0
 l_shoulder = 0
 r_hip = 0
 l_hip = 0
-
+total_r_angle = 0
+total_l_angle = 0
 # 반복문을 통해 카메라에서 프레임을 지속적으로 받아옴
 while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     # 웹캠으로부터 영상 가져옴
@@ -143,11 +144,9 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     # 결과 받아오기
     output = net.forward()
 
-    # 키포인트 X,Y 좌표
-    x_data, y_data = [],[]
-
     # 키포인트 검출시 이미지에 그려줌
     points = []
+    x_data, y_data = [], []
     for i in range(0, 25):
         # 해당 신체부위 신뢰도 얻음.
         probMap = output[0, i, :, :]
@@ -257,12 +256,14 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     r2 = [x_data[11], y_data[11]]
     r3 = [x_data[22], y_data[22]]
     angle_r = get_angle(r1, r2, r3, True)
+    total_r_angle += angle_r
 
     # 왼쪽 발목 각도 계산
     l1 = [x_data[13], y_data[13]]
     l2 = [x_data[14], y_data[14]]
     l3 = [x_data[19], y_data[19]]
     angle_l = get_angle(l1, l2, l3, False)
+    total_l_angle += angle_l
 
     # 좌우 어깨 좌표
     l_shoulder += y_data[5]
@@ -272,7 +273,6 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     l_hip += y_data[12]
     r_hip += y_data[9]
 
-    # 정보 출력
     print(
         round(angle_l, 2),
         " ",
@@ -286,7 +286,6 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
         " ",
         round(r_hip, 2),
     )
-
     if angle_r <= 165 and angle_l <= 165:
         count_foot += 1
 
@@ -324,12 +323,14 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
     cv2.imshow("Output-Keypoints", frame)
 
 # 걸음걸이 구분
+# print("평균 왼쪽 발목 각도: ", abs(round(180 - total_l_angle / total_frame, 2)))
+# print("평균 오른쪽 발목 각도: ", abs(round(180 - total_r_angle / total_frame, 2)))
 # if count_foot >= int(total_frame * 0.3):
 #     print("팔자 걸음")
 # else:
 #     print("일자 걸음")
-#
-# # 어깨 대칭 구분
+
+# 어깨 대칭 구분
 # if abs(l_shoulder / total_frame - r_shoulder / total_frame) >= 1:
 #     if l_shoulder / total_frame - r_shoulder / total_frame > 0:
 #         print("왼쪽 어깨 올라감")
@@ -337,8 +338,8 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
 #         print("오른쪽 어깨 올라감")
 # else:
 #     print("어깨의 균형이 잘 맞음")
-#
-# # 골반 대칭 구분
+
+# 골반 대칭 구분
 # if abs(l_hip / total_frame - r_hip / total_frame) >= 1:
 #     if l_hip / total_frame - r_hip / total_frame > 0:
 #         print("왼쪽 골반이 올라감")
@@ -346,7 +347,7 @@ while cv2.waitKey(1) < 0:  # 아무 키나 누르면 끝난다.
 #         print("오른쪽 골반이 올라감")
 # else:
 #     print("골반 균형이 잘 맞음")
-#
+
 # print(total_frame)
 capture.release()  # 카메라 장치에서 받아온 메모리 해제
 cv2.destroyAllWindows()  # 모든 윈도우 창 닫음
