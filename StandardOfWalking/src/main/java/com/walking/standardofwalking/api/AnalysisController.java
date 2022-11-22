@@ -31,8 +31,8 @@ public class AnalysisController {
         ProcessBuilder builder;
         BufferedReader br;
 
-        arg1 = "C:/Users/gram/The-Essence-Of-Walking-AI/walk/python_live.py";//파이썬 파일 경로
-        builder = new ProcessBuilder("python",arg1);
+        arg1 = "/Users/soominpark/Desktop/Essence_walk/The-Essence-Of-Walking-AI/walk/python_live.py";//파이썬 파일 경로
+        builder = new ProcessBuilder("python3",arg1);
 
         builder.redirectErrorStream(true);
         Process process = builder.start();
@@ -69,8 +69,8 @@ public class AnalysisController {
         ProcessBuilder builder;
         BufferedReader br;
 
-        arg1 = "C:/Users/gram/The-Essence-Of-Walking-AI/walk/python_file.py";//파이썬 파일 경로
-        builder = new ProcessBuilder("python",arg1);
+        arg1 = "/Users/soominpark/Desktop/Essence_walk/The-Essence-Of-Walking-AI/walk/python_file.py";//파이썬 파일 경로
+        builder = new ProcessBuilder("python3",arg1);
 
         builder.redirectErrorStream(true);
         Process process = builder.start();
@@ -87,9 +87,9 @@ public class AnalysisController {
         while ((line = br.readLine()) != null) {
             System.out.println(">>>  " + line);// 표준출력에 쓴다
             data = line.split("   ");
-//            if(count!=0)
-//                analysisRepository.save(new Analysis(userid,data[0],data[1],data[2],data[3],data[4],data[5],LocalDateTime.now()));
-//            count++;
+            if(count>1)
+                analysisRepository.save(new Analysis(userid,data[0],data[1],data[2],data[3],data[4],data[5],LocalDateTime.now()));
+            count++;
         }
 
         if(exitval !=0){
